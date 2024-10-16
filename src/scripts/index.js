@@ -4,7 +4,7 @@ import '../styles/responsive.css';
 
 import App from './views/app';
 
-// eslint-disable-next-line no-unused-vars
+
 const app = new App({
   button: document.querySelector('#hamburgerButton'),
   drawer: document.querySelector('#navigationDrawer'),
@@ -13,3 +13,12 @@ const app = new App({
 
 });
 
+window.addEventListener('hashchange', () => {
+  // hashchange (ketika url hash diubah)
+  app.renderPage();
+});
+
+window.addEventListener('load', () => {
+  // load (ketika halaman dimuat)
+  app.renderPage();
+});
