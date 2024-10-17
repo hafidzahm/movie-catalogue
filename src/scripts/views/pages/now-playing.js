@@ -18,7 +18,7 @@ const NowPlaying = {
     // Fungsi ini akan dipanggil setelah render()
     const movies = await TheMovieDbSource.nowPlayingMovies();
     console.log(movies);
-    
+
 
     // TODO: tampilkan movies di dalam DOM
     const moviesContainer = document.querySelector('#movies');
