@@ -1,6 +1,7 @@
 const CacheHelper = {
   async cachingAppShell(requests) {
-
+    const cache = await this._openCache();
+    cache.addAll(requests);
   },
 
   async deleteOldCache() {
@@ -9,6 +10,10 @@ const CacheHelper = {
 
   async revalidateCache(request) {
 
+  },
+
+  async _openCache() {
+    return caches.open('MovieCatalogue-V1');
   },
 };
 
