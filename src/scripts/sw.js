@@ -19,6 +19,7 @@ const assetsToCache = [
 ];
 
 self.addEventListener('install', (event) => {
+  event.waitUntil(CacheHelper.cachingAppShell([...assetsToCache]));
   console.log('Installing Service Worker ...');
 
   // TODO: Caching App Shell Resource
