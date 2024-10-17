@@ -26,6 +26,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+  event.waitUntil(CacheHelper.deleteOldCache());
   console.log('Activating Service Worker ...');
 
   // TODO: Delete old caches
