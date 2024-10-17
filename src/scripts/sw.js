@@ -35,6 +35,6 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   console.log(event.request);
 
-  event.respondWith(fetch(event.request));
+  event.respondWith(CacheHelper.revalidateCache(event.request));
   // TODO: Add/get fetch request to/from caches
 });
