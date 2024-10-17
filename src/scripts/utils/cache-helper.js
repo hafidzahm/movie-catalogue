@@ -5,7 +5,10 @@ const CacheHelper = {
   },
 
   async deleteOldCache() {
-
+    const cacheNames = await caches.keys();
+    cacheNames
+      .filter((name) => name !== 'MovieCatalogue-V1')
+      .map((filteredName) => caches.delete(filteredName));
   },
 
   async revalidateCache(request) {
