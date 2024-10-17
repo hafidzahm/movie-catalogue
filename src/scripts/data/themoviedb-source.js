@@ -4,7 +4,7 @@ class TheMovieDbSource {
   static async nowPlayingMovies() {
     const response = await fetch(API_ENDPOINT.NOW_PLAYING);
     const responseJson = await response.json();
-    return responseJson.results;
+    return responseJson.result;
   }
 
   static async upcomingMovies() {
