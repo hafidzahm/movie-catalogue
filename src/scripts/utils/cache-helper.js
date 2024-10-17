@@ -11,7 +11,15 @@ const CacheHelper = {
       .map((filteredName) => caches.delete(filteredName));
   },
 
-  async revalidateCache(request) {},
+  async revalidateCache(request) {
+    const response = await caches.match(request);
+
+    if (response) {
+      this._fetchRequest(request);
+      return response;
+    }
+    return this._fetchRequest(request);
+  },
 
   async _openCache() {
     return caches.open('MovieCatalogue-V1');
