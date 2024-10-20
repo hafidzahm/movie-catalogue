@@ -1,4 +1,7 @@
 const LikeButtonInitiator = {
+  async init({ likeButtonContainer, movie }) {
+
+  },
 
 };
 
