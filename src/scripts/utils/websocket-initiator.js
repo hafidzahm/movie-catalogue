@@ -1,4 +1,7 @@
 const WebSocketInitiator = {
+  init(url) {
+
+  },
 
 };
 
