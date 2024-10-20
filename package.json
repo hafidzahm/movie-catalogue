@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "idb": "^8.0.0",
     "regenerator-runtime": "^0.14.1",
     "workbox-window": "^7.1.0"
   }
