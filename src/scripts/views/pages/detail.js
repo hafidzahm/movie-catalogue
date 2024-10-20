@@ -3,20 +3,18 @@ import TheMovieDbSource from '../../data/themoviedb-source';
 import { createMovieDetailTemplate } from '../templates/template-creator';
 import LikeButtonInitiator from '../../utils/like-button-initiator';
 
+
 const Detail = {
   async render() {
     return `
-    <div id="movie" class="movie"></div>
-    <div id="likeButtonContainer"></div>
-        `;
+      <div id="movie" class="movie"></div>
+      <div id="likeButtonContainer"></div>
+    `;
   },
+
   async afterRender() {
-    //fungsi ini akan dipanggil setelah render()
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const movie = await TheMovieDbSource.detailMovie(url.id);
-    console.log(movie);
-
-    // TODO: tampilkan movie di dalam DOM
     const movieContainer = document.querySelector('#movie');
     movieContainer.innerHTML = createMovieDetailTemplate(movie);
 
@@ -30,7 +28,6 @@ const Detail = {
         vote_average: movie.vote_average,
       },
     });
-
   },
 };
 
