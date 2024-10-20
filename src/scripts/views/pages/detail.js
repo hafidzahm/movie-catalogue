@@ -1,6 +1,7 @@
 import UrlParser from '../../routes/url-parser';
 import TheMovieDbSource from '../../data/themoviedb-source';
-import { createMovieDetailTemplate, createLikeButtonTemplate } from '../templates/template-creator';
+import { createMovieDetailTemplate } from '../templates/template-creator';
+import LikeButtonInitiator from '../../utils/like-button-initiator';
 
 const Detail = {
   async render() {
@@ -17,9 +18,13 @@ const Detail = {
 
     // TODO: tampilkan movie di dalam DOM
     const movieContainer = document.querySelector('#movie');
-    const likeButtonContainer = document.querySelector('#likeButtonContainer');
     movieContainer.innerHTML = createMovieDetailTemplate(movie);
-    likeButtonContainer.innerHTML = createLikeButtonTemplate();
+
+    LikeButtonInitiator.init({
+      likeButtonContainer: document.querySelector('#likeButtonContainer'),
+      movie,
+    });
+
   },
 };
 
