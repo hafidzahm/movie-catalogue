@@ -1,7 +1,7 @@
 const NotificationHelper = {
-    sendNotification({ title, options }) {
-    
-  };
+  sendNotification({ title, options }) {
+
+  }
 
 };
 
