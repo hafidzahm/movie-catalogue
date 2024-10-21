@@ -28,19 +28,32 @@ const FooterToolsInitiator = {
 
   async _subscribePushMessage(event) {
     event.stopPropagation();
+   
+    if (await this._isCurrentSubscriptionAvailable()) {
+      window.alert('Already subscribe to push message');
+      return;
+    }
+    if (!(await this._isNotificationReady())) {
+      console.log('Notification isn\'t available');
+      return;
+    }
+   
     console.log('_subscribePushMessage: Subscribing to push message...');
     const pushSubscription = await this._registrationServiceWorker?.pushManager.subscribe(
       this._generateSubscribeOptions(),
     );
+   
     if (!pushSubscription) {
       console.log('Failed to subscribe push message');
       return;
     }
+   
     try {
       await this._sendPostToServer(CONFIG.PUSH_MSG_SUBSCRIBE_URL, pushSubscription);
       console.log('Push message has been subscribed');
     } catch (err) {
       console.error('Failed to store push notification data to server:', err.message);
+   
       // Undo subscribing push notification
       await pushSubscription?.unsubscribe();
     }
