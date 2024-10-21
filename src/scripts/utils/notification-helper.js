@@ -1,4 +1,7 @@
 const NotificationHelper = {
+    sendNotification({ title, options }) {
+    
+  };
 
 };
 
