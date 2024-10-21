@@ -96,6 +96,31 @@ const FooterToolsInitiator = {
       this._unsubscribeButton.style.display = 'none';
     }
   },
+ 
+  async _isCurrentSubscriptionAvailable() {
+    const checkSubscription = await this._registrationServiceWorker?.pushManager.getSubscription();
+    return Boolean(checkSubscription);
+  },
+  async _isNotificationReady() {
+    if (!NotificationHelper._checkAvailability()) {
+      console.log('Notification not supported in this browser');
+      return false;
+    }
+    if (!NotificationHelper._checkPermission()) {
+      console.log('User did not granted the notification permission yet');
+      const status = await Notification.requestPermission();
+      if (status === 'denied') {
+        window.alert('Cannot subscribe to push message because the status of notification permission is denied');
+        return false;
+      }
+      if (status === 'default') {
+        window.alert('Cannot subscribe to push message because the status of notification permission is ignored');
+        return false;
+      }
+    }
+    return true;
+  },
 };
+ 
 
 export default FooterToolsInitiator;
