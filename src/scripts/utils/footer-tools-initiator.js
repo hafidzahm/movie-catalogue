@@ -25,7 +25,9 @@ const FooterToolsInitiator = {
   },
 
 
-  async _initialState() {},
+  async _initialState() {
+    this._showSubscribeButton();
+  },
 
   async _subscribePushMessage(event) {
     event.stopPropagation();
@@ -46,6 +48,7 @@ const FooterToolsInitiator = {
       // Undo subscribing push notification
       await pushSubscription?.unsubscribe();
     }
+    this._showSubscribeButton();
   },
 
   async _unsubscribePushMessage(event) {
@@ -68,6 +71,7 @@ const FooterToolsInitiator = {
     } catch (err) {
       console.error('Failed to erase push notification data from server:', err.message);
     }
+    this._showSubscribeButton();
   },
 
   _urlB64ToUint8Array: (base64String) => {
@@ -136,6 +140,12 @@ const FooterToolsInitiator = {
       }
     }
     return true;
+  },
+
+  async _showSubscribeButton() {
+    this._isSubscribedToServerForHiddenSubscribeButton(
+      await this._isCurrentSubscriptionAvailable(),
+    );
   },
 };
 
