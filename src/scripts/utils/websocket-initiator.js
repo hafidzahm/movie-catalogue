@@ -7,6 +7,7 @@ const WebSocketInitiator = {
   _onMessageHandler(message) {
     console.log(message.data);
     console.log(JSON.parse(message.data));
+    console.warn('TESTING')
   },
 
 };
