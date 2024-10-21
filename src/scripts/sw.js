@@ -30,19 +30,15 @@ self.addEventListener('install', () => {
 self.addEventListener('push', (event) => {
   console.log('Service Worker: Pushed');
 
-  const notificationData = {
-    title: 'Push Notification',
+  const dataJson = event.data.json();
+  const notification = {
+    title: dataJson.title,
     options: {
-      body: 'This is a push notification',
-      icon: '/favicon.png',
-      image: '/icon-512x512/icon-512x512.jpg',
+      body: dataJson.options.body,
+      icon: dataJson.options.icon,
+      image: dataJson.options.image,
     },
   };
 
-  const showNotification = self.registration.showNotification(
-    notificationData.title,
-    notificationData.options,
-  );
-
-  event.waitUntil(showNotification);
+  event.waitUntil(self.registration.showNotification(notification.title, notification.options));
 });
