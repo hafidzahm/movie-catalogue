@@ -25,7 +25,9 @@ const FooterToolsInitiator = {
 
   async _initialState() {},
 
-  console.log('_subscribePushMessage: Subscribing to push message...');
+  async _subscribePushMessage(event) {
+    event.stopPropagation();
+    console.log('_subscribePushMessage: Subscribing to push message...');
     const pushSubscription = await this._registrationServiceWorker?.pushManager.subscribe(
       this._generateSubscribeOptions(),
     );
