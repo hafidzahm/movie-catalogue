@@ -1,3 +1,4 @@
+import CONFIG from '../globals/config';
 const FooterToolsInitiator = {
   async init({ subscribeButton, unsubscribeButton }) {
     this._subscribeButton = subscribeButton;
@@ -65,6 +66,13 @@ const FooterToolsInitiator = {
       outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
+  },
+
+  _generateSubscribeOptions() {
+    return {
+      userVisibleOnly: true,
+      applicationServerKey: this._urlB64ToUint8Array(CONFIG.PUSH_MSG_VAPID_PUBLIC_KEY),
+    };
   },
 
   async _sendPostToServer(url, data) {
